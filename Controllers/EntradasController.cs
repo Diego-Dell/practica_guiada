@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using practica_guiada.Models;
+using practica_guiada.ViewModels;
 
 namespace practica_guiada.Controllers
 {
@@ -8,20 +9,35 @@ namespace practica_guiada.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var modelo = new Cotizacion();
-            return View(modelo);
+            var viewModel = new CotizacionInputViewModel();
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Calcular(Cotizacion modelo)
+        public IActionResult Calcular(CotizacionInputViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View("Index", modelo);
+                return View("Index", viewModel);
             }
 
-            return View("Resultado", modelo);
+            var cotizacion = new Cotizacion
+            {
+                Cliente = viewModel.Cliente,
+                Cantidad = viewModel.Cantidad
+            };
+
+            var resultadoViewModel = new ResultadoCotizacionViewModel
+            {
+                Cotizacion = cotizacion,
+                Evento = "Concierto Web III",
+                FechaEvento = new DateTime(2026, 11, 15),
+                Mensaje = "Gracias por realizar su cotización.",
+                TipoEntrada = viewModel.TipoEntrada
+            };
+
+            return View("Resultado", resultadoViewModel);
         }
     }
 }

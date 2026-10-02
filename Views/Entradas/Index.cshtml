@@ -1,4 +1,4 @@
-﻿@model practica_guiada.Models.Cotizacion
+@model practica_guiada.ViewModels.CotizacionInputViewModel
 
 @{
     ViewData["Title"] = "Cotizar entradas";
@@ -20,40 +20,30 @@
     </div>
 
     <div class="mb-3">
-
-        <label asp-for="Cliente"
-               class="form-label">
-        </label>
-
-        <input asp-for="Cliente"
-               class="form-control" />
-
-        <span asp-validation-for="Cliente"
-              class="text-danger">
-        </span>
-
+        <label asp-for="Cliente" class="form-label"></label>
+        <input asp-for="Cliente" class="form-control" />
+        <span asp-validation-for="Cliente" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-
-        <label asp-for="Cantidad"
-               class="form-label">
-        </label>
-
-        <input asp-for="Cantidad"
-               class="form-control" />
-
-        <span asp-validation-for="Cantidad"
-              class="text-danger">
-        </span>
-
+        <label asp-for="Cantidad" class="form-label"></label>
+        <input asp-for="Cantidad" class="form-control" />
+        <span asp-validation-for="Cantidad" class="text-danger"></span>
     </div>
 
-    <button type="submit"
-            class="btn btn-primary">
+    <div class="mb-3">
+        <label asp-for="TipoEntrada" class="form-label"></label>
+        <select asp-for="TipoEntrada" class="form-select">
+            <option value="">-- Seleccione --</option>
+            <option value="General">General</option>
+            <option value="VIP">VIP</option>
+        </select>
+        <span asp-validation-for="TipoEntrada" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
         Calcular
     </button>
-
 </form>
 
 @section Scripts {
